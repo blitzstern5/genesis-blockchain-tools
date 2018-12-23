@@ -1,8 +1,7 @@
 from hashlib import sha256, sha512
 from crccheck.crc import Crc64Xz
 from ..convert import fill_from_left
-
-ADDRESS_LENGTH = 20
+from ..convert.genesis import ADDRESS_LENGTH
 
 def checksum(data):
     first = 0
@@ -31,6 +30,8 @@ def public_key_to_address(pub_key):
     if final > 2**63 - 1:
         final = final - 2**64
     return final
+
+public_key_to_key_id = public_key_to_address
 
 def double_hash(data):
     h256 = sha256(data).digest()
