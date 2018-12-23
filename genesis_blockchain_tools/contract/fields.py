@@ -69,8 +69,8 @@ class BooleanField(Field):
 
     @value.setter
     def value(self, value):
-        self._value = bool(re.search('^\s*(true|yes|1(.(0)+)?)\s*$', str(value),
-                                     re.IGNORECASE))
+        self._value = bool(re.search(r'^\s*(true|yes|1(.(0)+)?)\s*$',
+                                     str(value), re.IGNORECASE))
 
 class FloatField(Field):
     @property
