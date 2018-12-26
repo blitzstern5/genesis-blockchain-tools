@@ -47,7 +47,8 @@ def gen_keypair(curve=curve.P256, hashfunc=sha256, pub_key_fmt='RAW'):
 
 def sign(priv_key, data, hashfunc=sha256, curve=curve.P256, sign_fmt='DER', 
          sign_size=32):
-    data = data.encode()
+    if type(data) != bytes:
+        data = data.encode()
     priv_key = bytes.fromhex(priv_key)
     priv_key = SigningKey.from_string(priv_key, curve=curve, hashfunc=hashfunc)
     if sign_fmt == "DER":

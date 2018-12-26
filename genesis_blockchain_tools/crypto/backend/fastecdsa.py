@@ -35,6 +35,8 @@ def gen_keypair(curve=curve.P256, hashfunc=sha256, pub_key_fmt='RAW'):
 
 def sign(priv_key, data, hashfunc=sha256, curve=curve.P256, sign_fmt='DER',
          sign_size=32):
+    if type(data) == bytes:
+        data = data.decode()
     r, s = ecdsa.sign(data, int(priv_key, 16), hashfunc=hashfunc)
     if sign_fmt in ['RAW', 'DER']:
         return encode_sig(r, s, fmt=sign_fmt, size=sign_size).hex()

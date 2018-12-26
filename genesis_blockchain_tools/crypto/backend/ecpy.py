@@ -120,7 +120,9 @@ def sign(priv_key, data, hashfunc=sha256, curve=curve.P256, sign_fmt='DER',
     else:
         raise UnknownSignatureFormatError("fmt: '%s'" % sign_fmt)
     signer = ECDSAWithSize(fmt=sign_fmt, size=sign_size)
-    msg = hashfunc(data.encode()).digest()
+    if type(data) != bytes:
+        data = data.encode()
+    msg = hashfunc(data).digest()
     signature = signer.sign(msg, priv_key_obj).hex()
     return signature
 

@@ -74,6 +74,8 @@ Using pip/requirements:
 Usage
 -----
 
+### Cryptography 
+
 To get public key by private key:
 
 ```
@@ -91,6 +93,53 @@ from genesis_blockchain_tools.crypto import sign
 priv_key = '2922bee6973370915cc63ab5ab8b7a57e1cab909477d7a030b2e4661e7aa2202'
 data = "Some data to sign"
 signature = sign(priv_key, data)
+```
+
+### Client-side transactions
+
+#### Common client-side transaction
+
+To create client-side transaction data:
+
+```
+from genesis_blockchain_tools.contract import Contract
+
+priv_key = '2922bee6973370915cc63ab5ab8b7a57e1cab909477d7a030b2e4661e7aa2202'
+# schema that was obtained as a result of the GET /api/v2/contract/EditPage query
+schema = {'id': 273, 'state': 1, 'active': False, 'tableid': '13', 'walletid': '-6097185355090423139', 'tokenid': '1', 'address': '1234-9558-7186-1912-8477', 'fields': [{'name': 'Id', 'type': 'int', 'optional': False}, {'name': 'Value', 'type': 'string', 'optional': True}, {'name': 'Menu', 'type': 'string', 'optional':
+True}, {'name': 'Conditions', 'type': 'string', 'optional': True}, {'name': 'ValidateCount', 'type': 'int', 'optional': True}, {'name': 'ValidateMode', 'type':
+'string', 'optional': True}], 'name': '@1EditPage'} 
+contract = Contract(schema=schema, private_key=priv_key, params={'Id': 2, 'Value': 'notifications'})
+tx_bin_data = contract.concat()
+
+```
+
+#### Working with files in client-side transaction/contract:
+
+How to attach a local file to contract:
+
+```
+contract = Contract(schema=schema, private_key=priv_key, params={'SomeParam': 'SomeValue', 'File': {'Path': path_to_local_file}})
+
+```
+
+Mime type autodetection is on by default.
+File path by default is reduced to basename.
+
+To customize mime type or name use it like this:
+```
+contract = Contract(schema=schema, private_key=priv_key, params={'SomeParam': 'SomeValue', 'File': {'Path': path_to_local_file, 'Name': 'file.txt', 'MimeType': 'image/gif'}})
+
+```
+Also simplified path setting is available:
+```
+contract = Contract(schema=schema, private_key=priv_key, params={'SomeParam': 'SomeValue', 'File': string_path_to_local_file, 'Name': 'file.txt', 'MimeType': 'image/gif'}})
+
+```
+And aslo simplified raw bytes setting is available:
+```
+contract = Contract(schema=schema, private_key=priv_key, params={'SomeParem': 'SomeValue, 'File': bytes_var, 'Name': 'file.txt', 'MimeType': 'image/gif'}})
+
 ```
 
 Requirements
