@@ -1,3 +1,7 @@
+## 0.3.0 (2019-May-19 20:58)
+
+* Added genbc-conv cli utility to convert Key ID, Address, Private and Public Keys
+
 ## 0.2.1 (2018-Dec-26 18:44)
 
 * Added several encoding/decoding functions duplicating its backend's versions
