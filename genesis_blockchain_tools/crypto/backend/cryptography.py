@@ -77,7 +77,8 @@ def verify(pub_key, data, signature, hashfunc=sha256, curve=curve.P256,
         raise UnknownSignatureFormatError("fmt: '%s'" % sign_fmt)
 
     try:
-        pub_key_p = ec.EllipticCurvePublicNumbers.from_encoded_point(curve, bytes.fromhex(pub_key_encoded)).public_key(backend).verify(signature, data_bytes, ec.ECDSA(hashfunc))
+        pub_key_p = ec.EllipticCurvePublicKey.from_encoded_point(curve, bytes.fromhex(pub_key_encoded)).verify(signature, data_bytes, ec.ECDSA(hashfunc))
+        #pub_key_p = ec.EllipticCurvePublicNumbers.from_encoded_point(curve, bytes.fromhex(pub_key_encoded)).public_key(backend).verify(signature, data_bytes, ec.ECDSA(hashfunc))
     except InvalidSignature as e:
         logger.debug("Invalid signature: %s, pub key: %s, data: %s" % (signature, pub_key, data))
         return False
