@@ -1,3 +1,8 @@
+## 0.4.0 (2019-Jul-16 02:20)
+
+* More tests for genesis convert/crypto function were added
+* Functions public_key_to_key_id and public_key_to_address now return what they should: key_id (int64) and address (1234-1234-1234-1234-1234 like string) appropriately 
+
 ## 0.3.1 (2019-Jul-15 01:30)
 
 * Fixed issues in find_mime_type_recursive function
