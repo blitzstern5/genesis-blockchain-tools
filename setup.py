@@ -27,6 +27,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     python_requires='>=3',
+    setup_requires=['pytest-runner'],
     install_requires=[
         'cryptography == 2.7',
         'crccheck == 0.6',
