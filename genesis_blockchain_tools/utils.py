@@ -22,3 +22,5 @@ def find_mime_type_recursive(m):
                 return found
     elif is_string(m) and re.search(r'\w+\/\w+', m, re.IGNORECASE):
         return m 
+    elif isinstance(m, object) and hasattr(m, 'mime_type'):
+        return m.mime_type
