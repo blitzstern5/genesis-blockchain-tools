@@ -8,15 +8,6 @@ here = os.path.abspath(os.path.dirname(__file__))
 with open(os.path.join(here, 'README.md')) as f:
     README = f.read()
 
-requires = [
-    'pytest',
-    'cryptography',
-    'crccheck',
-    'msgpack-pure',
-    'msgpack',
-    'puremagic',
-]
-
 setup(
     name='genesis_blockchain_tools',
     version=__VERSION__,
@@ -34,5 +25,15 @@ setup(
     include_package_data=True,
     zip_safe=False,
     test_suite='genesis_blockchain_tools',
-    install_requires=requires,
+    install_requires=[
+        'cryptography >= 2.7',
+        'crccheck >= 0.6',
+        'msgpack-pure >= 0.1.3',
+        'msgpack >= 0.6.1',
+        'puremagic >= 1.5',
+    ],
+    tests_require=["pytest >= 5.0.1"],
+    extras_require={
+        'testing': ["pytest >= 5.0.1"],
+    }
 )
