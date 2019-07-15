@@ -1,7 +1,7 @@
 from hashlib import sha256, sha512
 from crccheck.crc import Crc64Xz
 from ..convert import fill_from_left
-from ..convert.genesis import ADDRESS_LENGTH
+from ..convert.genesis import ADDRESS_LENGTH, key_id_to_address
 
 def checksum(data):
     first = 0
@@ -20,7 +20,7 @@ def checksum(data):
         checksum = 10 - checksum
     return checksum
 
-def public_key_to_address(pub_key):
+def public_key_to_key_id(pub_key):
     h256 = sha256(pub_key).digest()
     h512 = sha512(h256).digest()
     crc = Crc64Xz().calc(h512)
@@ -31,7 +31,8 @@ def public_key_to_address(pub_key):
         final = final - 2**64
     return final
 
-public_key_to_key_id = public_key_to_address
+def public_key_to_address(pub_key):
+    return key_id_to_address(public_key_to_key_id(pub_key))
 
 def double_hash(data):
     h256 = sha256(data).digest()
