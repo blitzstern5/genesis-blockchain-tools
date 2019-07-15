@@ -24,7 +24,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
-    test_suite='genesis_blockchain_tools',
+    test_suite='tests',
     install_requires=[
         'cryptography >= 2.7',
         'crccheck >= 0.6',
