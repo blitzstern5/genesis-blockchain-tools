@@ -1,6 +1,20 @@
-import imp
 import os
 import sys
+
+def load_module_by_path(module_name, path): 
+    if sys.version_info[0] == 2:
+        import imp
+        foo = imp.load_source(module_name, path)
+    elif sys.version_info[0] == 3:
+        if sys.version_info[1] < 5:
+            from importlib.machinery import SourceFileLoader
+            foo = SourceFileLoader(module_name, path).load_module()
+        else:
+            import importlib.util
+            spec = importlib.util.spec_from_file_location(module_name, path)
+            foo = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(foo)
+    return foo        
 
 __BACKEND_NAMES = ('fastecdsa', 'cryptography', 'ecdsa', 'ecpy', 'rubenesque')
 __EXPORTED_NAMES = ('gen_private_key', 'get_public_key', 'gen_keypair', 'sign',
@@ -16,7 +30,7 @@ def import_crypto_by_backend(name):
         path, part = os.path.split(path)
         l.insert(0, part)
     l.append(name)
-    return imp.load_source('.'.join(l), os.path.join(basedir, name + '.py'))
+    return load_module_by_path('.'.join(l), os.path.join(basedir, name + '.py'))
 
 def get_backend_names():
     return __BACKEND_NAMES
