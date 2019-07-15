@@ -7,6 +7,7 @@
 * Added python version agnostic load_module_by_path function to load module by path
 * Freeze packages versions
 * Update setup.py and add setup.cfg
+* Added entry point for console script genbc-conv
 
 ## 0.3.0 (2019-May-19 20:58)
 
