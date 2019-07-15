@@ -5,7 +5,7 @@ from random import randint
 
 from ..crypto import sign, get_public_key
 from ..convert import encode_length_plus_data
-from ..crypto.genesis import public_key_to_address, double_hash
+from ..crypto.genesis import public_key_to_key_id, double_hash
 
 from .fields import (
     Field, IntegerField, StringField, BooleanField, MoneyField, FloatField,
@@ -30,6 +30,7 @@ class Contract:
         "array": ArrayField,
         "file": FileField,
     }
+
     def update_from_schema(self, schema):
         self.schema = schema
         if 'id' in self.schema:
@@ -116,7 +117,7 @@ class Contract:
                                bytes.fromhex(get_public_key(self.private_key))))
         if not self.public_key:
             PublicKeyIsNotSetError(self.public_key)
-        self.key_id = public_key_to_address(self.public_key)
+        self.key_id = public_key_to_key_id(self.public_key)
         self.max_sum = kwargs.get('max_sum', kwargs.get('MaxSum', ''))
         self.pay_over = kwargs.get('pay_over', kwargs.get('PayOver', ''))
         self.params = kwargs.get('params', kwargs.get('Params', {}))
