@@ -5,6 +5,7 @@
 * Added support of an object with mime_type attribute searching
 * Replaced EllipticCurvePublicNumbers.from_encoded_point with ec.EllipticCurvePublicNumbers.from_encoded_point
 * Added python version agnostic load_module_by_path function to load module by path
+* Freeze packages versions
 
 ## 0.3.0 (2019-May-19 20:58)
 
