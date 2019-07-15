@@ -38,5 +38,10 @@ setup(
     tests_require=["pytest >= 5.0.1"],
     extras_require={
         'testing': ["pytest >= 5.0.1"],
-    }
+    },
+    entry_points={
+        'console_scripts': [
+            'genbc-conv = genesis_blockchain_tools.bin.conv:main',
+        ],
+    },
 )
