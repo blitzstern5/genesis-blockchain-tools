@@ -2,7 +2,7 @@ import os
 
 from setuptools import setup, find_packages
 
-__VERSION__ = '0.4.0'
+__VERSION__ = '0.4.1'
 
 here = os.path.abspath(os.path.dirname(__file__))
 with open(os.path.join(here, 'README.md')) as f:
@@ -29,11 +29,11 @@ setup(
     python_requires='>=3',
     setup_requires=['pytest-runner'],
     install_requires=[
-        'cryptography == 2.7',
-        'crccheck == 0.6',
-        'msgpack-pure == 0.1.3',
-        'msgpack == 0.6.1',
-        'puremagic == 1.5',
+        'cryptography >= 2.7',
+        'crccheck >= 0.6',
+        'msgpack-pure >= 0.1.3',
+        'msgpack >= 0.6.1',
+        'puremagic >= 1.5',
     ],
     tests_require=["pytest >= 5.0.1"],
     extras_require={
