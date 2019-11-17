@@ -1,3 +1,7 @@
+## 0.4.1 (2019-Nov-17 23:39)
+
+* Update requirements
+
 ## 0.4.0 (2019-Jul-16 02:20)
 
 * More tests for genesis convert/crypto function were added
